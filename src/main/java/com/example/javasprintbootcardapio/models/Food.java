@@ -1,15 +1,13 @@
 package com.example.javasprintbootcardapio.models;
 
-import com.example.javasprintbootcardapio.controller.FoodRequest;
+import com.example.javasprintbootcardapio.dtos.FoodDTO;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Table(name = "food")
 @Entity(name = "food")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
@@ -20,9 +18,9 @@ public class Food {
     private String image;
     private Integer price;
 
-    public Food(FoodRequest foodRequest) {
-        this.image = foodRequest.image();
-        this.title = foodRequest.title();
-        this.price = foodRequest.price();
+    public Food(FoodDTO foodDTO) {
+        this.title = foodDTO.title();
+        this.image = foodDTO.image();
+        this.price = foodDTO.price();
     }
 }
