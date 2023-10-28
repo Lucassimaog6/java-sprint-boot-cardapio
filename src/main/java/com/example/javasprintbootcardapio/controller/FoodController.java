@@ -17,11 +17,13 @@ import java.util.Optional;
 public class FoodController {
     @Autowired
     private FoodRepository foodRepository;
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("/food")
     public ResponseEntity<List<Food>> getAllFoods() {
         return ResponseEntity.status(HttpStatus.OK).body(foodRepository.findAll());
     }
 
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("/food/{id}")
     public ResponseEntity<?> getFoodById(@PathVariable(value = "id") Long id) {
         Optional<Food> food = foodRepository.findById(id);
@@ -32,12 +34,14 @@ public class FoodController {
         }
     }
 
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/food")
     public ResponseEntity<Food> createFood(@RequestBody @Valid FoodDTO foodDTO) {
         Food food = new Food(foodDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(foodRepository.save(food));
     }
 
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PutMapping("/food/{id}")
     public ResponseEntity<Object> updateFoodById(@PathVariable(value = "id") Long id, @RequestBody @Valid FoodDTO foodDTO) {
         Optional<Food> existingFood = foodRepository.findById(id);
@@ -50,6 +54,7 @@ public class FoodController {
         }
     }
 
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @DeleteMapping("/food/{id}")
     public ResponseEntity<Object> deleteFoodById(@PathVariable(value = "id") Long id) {
         Optional<Food> existingFood = foodRepository.findById(id);
